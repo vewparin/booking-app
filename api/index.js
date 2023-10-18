@@ -93,7 +93,7 @@ if (!fs.existsSync(uploadsDir)) {
 }
 app.post('/upload-by-link', async (req, res) => {
     const { link } = req.body;
-     console.log('Received link:', link);
+    //  console.log('Received link:', link);
     const newName = 'photo' + Date.now() + '.jpg';
 
     try {
@@ -145,13 +145,13 @@ app.post('/upload', photoMiddleware.array('photos', 100), (req, res) => {
 app.post('/places', (req, res) => {
     const { token } = req.cookies;
     const {
-        title, address, addedPhotos, description,
+        title, address, addedPhotos, description,price,
         perks, extraInfo, checkIn, checkOut, maxGuests,
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if (err) throw err;
         const placeDoc = await Place.create({
-            owner: userData.id,
+            owner: userData.id,price,
             title, address, photos: addedPhotos, description,
             perks, extraInfo, checkIn, checkOut, maxGuests,
         });
@@ -175,15 +175,16 @@ app.put('/places', async (req, res) => {
     const { token } = req.cookies;
     const {
         id, title, address, addedPhotos, description,
-        perks, extraInfo, checkIn, checkOut, maxGuests,
+        perks, extraInfo, checkIn, checkOut, maxGuests,price,
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if(err) throw err;
         const placeDoc = await Place.findById(id);
         if (userData.id === placeDoc.owner.toString()) {
+            // console.log({price})
             placeDoc.set({
                 title, address, photos: addedPhotos, description,
-                perks, extraInfo, checkIn, checkOut, maxGuests,
+                perks, extraInfo, checkIn, checkOut, maxGuests,price,
             });
             await placeDoc.save();
             res.json(`Okay Update Successful`)
