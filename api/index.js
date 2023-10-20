@@ -80,7 +80,7 @@ app.get('/profile', (req, res) => {
     } else {
         res.json(null)
     }
-    // res.json({token});   
+      
 })
 
 app.post('/logout', (req, res) => {
@@ -93,9 +93,7 @@ if (!fs.existsSync(uploadsDir)) {
 }
 app.post('/upload-by-link', async (req, res) => {
     const { link } = req.body;
-    //  console.log('Received link:', link);
     const newName = 'photo' + Date.now() + '.jpg';
-
     try {
         await imageDownloader.image({
             url: link,
@@ -110,23 +108,6 @@ app.post('/upload-by-link', async (req, res) => {
 });
 
 app.use(express.static('uploads'));
-
-
-// app.post('/upload-by-link',async (req,res) =>{
-//     const { link } = req.body;
-//     const newName = 'photo' + Date.now() + '.jpg';
-//     try{
-//     await imageDownloader.image({
-//         url: link,
-//         dest: __dirname + 'uploads' + newName,
-//     });
-//     res.json(newName);
-//      } catch(error){
-//         console.error('Error',error);
-//         res.status(500).send('Internal Server Error');
-//      }
-// });
-
 
 const photoMiddleware = multer({ dest: 'uploads/' });
 app.post('/upload', photoMiddleware.array('photos', 100), (req, res) => {
@@ -166,6 +147,7 @@ app.get('/user-places', (req, res) => {
         res.json(await Place.find({ owner: id }));
     });
 });
+
 app.get('/places/:id', async (req, res) => {
     const { id } = req.params;
     res.json(await Place.findById(id));
@@ -181,7 +163,6 @@ app.put('/places', async (req, res) => {
         if(err) throw err;
         const placeDoc = await Place.findById(id);
         if (userData.id === placeDoc.owner.toString()) {
-            // console.log({price})
             placeDoc.set({
                 title, address, photos: addedPhotos, description,
                 perks, extraInfo, checkIn, checkOut, maxGuests,price,

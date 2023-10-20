@@ -60,7 +60,7 @@ export default function PlacesFormPage() {
             title, address, addedPhotos,
             description, perks, extraInfo,
             checkIn, checkOut, maxGuests,price
-        }
+        };
         if (id) {
             //update
             await axios.put('/places', {

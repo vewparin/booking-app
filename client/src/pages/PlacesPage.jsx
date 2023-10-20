@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function PlacesPage() {
     const [places, setPlaces] = useState([]);
+
     useEffect(() => {
         axios.get('/user-places').then(({ data }) => {
             setPlaces(data);
@@ -22,6 +23,7 @@ export default function PlacesPage() {
                     Add new Place
                 </Link>
             </div>
+
             <div className="mt-4">
                 {places.length > 0 && places.map(place => (
                     <Link to={'/account/places/' + place._id} key={place._id} className=" flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
