@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AlbumHeader from "../AlbumHeader";
+import AlbumFooters from "../AlbumFooters";
+
 
 export default function IndexPage() {
     const [places, setPlaces] = useState([]);
@@ -10,24 +13,33 @@ export default function IndexPage() {
         });
     }, []);
     return (
-        <div className="mt-8 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {places.length > 0 && places.map(place => (
-                <Link to = {'/place/'+ place._id}>
-                <div key={place._id}>
-                    <div className="bg-gray-500 mb-2 rounded-2xl flex">
-                    <img className="" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/09/ab/ab/swimming-pool-our-outdoor.jpg?w=1200&h=-1&s=1" />
-                        {/* {place.addedPhotos?.[0] && (
-                            <img src={'http://localhost:4000/api/uploads/' + place.addedPhotos?.[0]} alt="" />
-                        )} */}
-                    </div>
-                    <h2 className="font-bold">{place.address}</h2>
-                    <h3 className="text-sm text-gray-500">{place.title}</h3>
-                    <div className="mt-1">
-                        <span className="font-bold">{place.price} ฿ per night</span>
-                    </div>
-                </div>
-                </Link>
-            ))}
+        <div className="mt-5">
+            <AlbumHeader />
+
+            <h1 className="text-bold text-xl bg-sky-900 text-white p-3 rounded-xl">LIST HOTEL</h1>
+            <div className="mt-2 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {places.length > 0 && places.map(place => (
+                    <Link to={'/place/' + place._id}>
+                        <div key={place._id}>
+                            <div className="bg-gray-800 mb-2 rounded-2xl flex">
+                                {place.addedPhotos?.[0] && (
+                                    <img className="w-full h-full" src={'http://localhost:4000/uploads/' + place.photos?.[0]} alt="" />
+                                )}
+                            </div>
+                            <div className="bg-sky-800 text-white py-8 pl-4 rounded-2xl ">
+                                <h2 className="font-bold">{place.address}</h2>
+                                <h3 className="text-sm text-gray-500 text-white mt-2">{place.title}</h3>
+                                <div className="mt-1">
+                                    <span className="font-bold">{place.price} ฿ per night</span>
+                                </div>
+                                <button className="mt-4 text-white p-2 bg-sky-500 rounded-2xl">จองเลย Click</button>
+                            </div>
+
+                        </div>
+                    </Link>
+                ))}
+            </div>
+            <AlbumFooters/>
         </div>
     );
 
