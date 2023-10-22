@@ -1,14 +1,38 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { differenceInCalendarDays } from 'date-fns';
+import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "./UserContext";
 export default function BookingDetail({ place }) {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [numberOfGuests, setNumberOfGuests] = useState(1);
     const [name, setName] = useState('');
     const [telephone, setTelephone] = useState('');
+    const [redirect, setRedirect] = useState('');
+    const { user } = useContext(UserContext);
+    useEffect(() => {
+        if (user) {
+            setName(user.name);
+        }
+    }, [user])
+
     let numberOfDays = 0;
     if (checkIn && checkOut) {
         numberOfDays = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
+    }
+    async function bookingPlaces() {
+
+        const response = await axios.post('/bookings', {
+            checkIn, checkOut, numberOfGuests, name, telephone,
+            place: place._id, price: numberOfGuests * place.price,
+        });
+        const bookingId = response.data._id;
+        setRedirect(`/account/bookings/${bookingId}`);
+    }
+
+    if (redirect) {
+        return <Navigate to={redirect} />
     }
 
 
@@ -47,7 +71,7 @@ export default function BookingDetail({ place }) {
                     </div>
                 )}
             </div>
-            <button className="primary mt-2">
+            <button onClick={bookingPlaces} className="primary mt-2">
                 จองเลย {" "}
                 {numberOfDays > 0 && (
                     <span>{numberOfDays * place.price} BATH</span>
