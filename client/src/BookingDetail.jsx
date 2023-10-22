@@ -22,7 +22,6 @@ export default function BookingDetail({ place }) {
         numberOfDays = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
     }
     async function bookingPlaces() {
-
         const response = await axios.post('/bookings', {
             checkIn, checkOut, numberOfGuests, name, telephone,
             place: place._id, price: numberOfGuests * place.price,

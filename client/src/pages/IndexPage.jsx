@@ -15,7 +15,6 @@ export default function IndexPage() {
     return (
         <div className="mt-5">
             <AlbumHeader />
-
             <h1 className="text-bold text-xl bg-sky-900 text-white p-3 rounded-xl">LIST HOTEL</h1>
             <div className="mt-2 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {places.length > 0 && places.map(place => (
@@ -26,20 +25,22 @@ export default function IndexPage() {
                                     <img className="w-full h-full" src={'http://localhost:4000/uploads/' + place.photos?.[0]} alt="" />
                                 )}
                             </div>
-                            <div className="bg-sky-800 text-white py-8 pl-4 rounded-2xl ">
-                                <h2 className="font-bold">{place.address}</h2>
-                                <h3 className="text-sm text-gray-500 text-white mt-2">{place.title}</h3>
-                                <div className="mt-1">
-                                    <span className="font-bold">{place.price} ฿ per night</span>
-                                </div>
-                                <button className="mt-4 text-white p-2 bg-sky-500 rounded-2xl">จองเลย Click</button>
+                            <div className=" h-[300px] bg-sky-800 text-white p-4 rounded-2xl flex flex-col justify-between">
+                                <div>                                
+                                    <h2 className="font-bold">{place.address}</h2>
+                                    <h3 className="text-sm text-gray-500 text-white mt-2">{place.title}</h3>
+                                    <div className="mt-1">
+                                        <span className="font-bold">{place.price} ฿ per night</span>
+                                    </div></div>
+
+                                <button className="mt-4 text-white p-2  bg-sky-500 rounded-2xl">จองเลย Click</button>
                             </div>
 
                         </div>
                     </Link>
                 ))}
             </div>
-            <AlbumFooters/>
+            <AlbumFooters />
         </div>
     );
 
