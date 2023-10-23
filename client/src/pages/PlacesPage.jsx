@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AlbumFooters from "../AlbumFooters";
 
 
 export default function PlacesPage() {
@@ -24,13 +25,9 @@ export default function PlacesPage() {
                     Add new Place
                 </Link>
             </div>
-
-            <div className="mt-4">
+            <div className="grid grid-cols-4 gap-4 mt-3">
                 {places.length > 0 && places.map(place => (
-                    <Link to={'/account/places/' + place._id} key={place._id} className=" flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
-                        <div className="flex w-32 h-32 bg-gray-300 grow shrink-0">
-                          
-                        </div>
+                    <Link to={'/account/places/' + place._id} key={place._id} className=" flex text-white cursor-pointer bg-sky-800 bg-opacity-90 p-4 rounded-2xl">
                         <div className="grow-0 shrink">
                             <h2 className="text-xl font-bold ">{place.title}</h2>
                             <p className="text-sm mt-2">{place.description}</p>
@@ -38,6 +35,7 @@ export default function PlacesPage() {
                     </Link>
                 ))}
             </div>
+            <AlbumFooters/>
         </div>
     );
 }

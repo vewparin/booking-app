@@ -4,6 +4,7 @@ import axios from "axios";
 import { differenceInCalendarDays, format } from "date-fns";
 import { Link } from "react-router-dom";
 import DatesAlbum from "../DatesAlbum";
+import AlbumFooters from "../AlbumFooters";
 
 
 
@@ -17,14 +18,11 @@ export default function BooksPage() {
     return (
         <div>
             <AccountNav />
-            <div>
+            <div className="flex flex-wrap gap-3">
                 {bookings?.length > 0 && bookings.map(booking => (
-                    <Link to={`/account/bookings/${booking._id}`} className="gap-6 bg-gray-800 rounded-1xl overflow-hidden">
-                        <div className="bg-sky-100 p-2  rounded-xl gap-5">
-                            <div>
-                                
-                            </div>
-                            <div className="py-3 pr-3 grow  ">
+                    <Link to={`/account/bookings/${booking._id}`} className="rounded-1xl overflow-hidden">
+                        <div className="bg-sky-800 p-2  rounded-xl gap-5">
+                            <div className="py-3 pr-3 grow text-white">
                                 <h2 className="font-bold text-xl">{booking.place.title}</h2>
                                 <div className="mt-2">
                                     <DatesAlbum booking={booking} />
@@ -39,7 +37,7 @@ export default function BooksPage() {
                     </Link>
                 ))}
             </div>
+            <AlbumFooters />
         </div>
-
     );
 };

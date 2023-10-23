@@ -34,14 +34,13 @@ export default function IndexPage() {
                                     <img className="w-full h-full" src={'http://localhost:4000/uploads/' + place.photos?.[0]} alt="" />
                                 )}
                             </div>
-                            <div className=" h-[300px] bg-sky-800 bg-opacity-90 text-white p-4 rounded-2xl flex flex-col justify-between">
+                            <div className=" h-[300px] bg-sky-800 bg-opacity-89 text-white p-4 rounded-2xl flex flex-col justify-between">
                                 <div>
                                     <h2 className="font-bold">{place.address}</h2>
                                     <h3 className="text-sm text-gray-500 text-white mt-2">{place.title}</h3>
                                     <div className="mt-1">
                                         <span className="font-bold">{place.price} ฿ per night</span>
                                     </div></div>
-
                                 <button className="mt-4 text-white p-2  bg-sky-500 rounded-2xl">จองเลย Click</button>
                             </div>
 
