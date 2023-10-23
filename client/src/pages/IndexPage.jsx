@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AlbumHeader from "../AlbumHeader";
 import AlbumFooters from "../AlbumFooters";
+import CarouselAlbum from "../CarouselAlbum";
 
 
 export default function IndexPage() {
@@ -14,9 +15,17 @@ export default function IndexPage() {
     }, []);
     return (
         <div className="mt-5">
-            <AlbumHeader />
-            <h1 className="text-bold text-xl bg-sky-900 text-white p-3 rounded-xl">LIST HOTEL</h1>
-            <div className="mt-2 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="relative">
+                <CarouselAlbum />
+            </div>
+            <div className="absolute top-10">
+                <div className="text-white">
+                    <AlbumHeader />
+                </div>
+            </div>
+
+            <h1 className=" mt-2 text-bold text-xl bg-sky-900 text-white p-3 rounded-xl">LIST HOTEL</h1>
+            <div className="mt-1 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {places.length > 0 && places.map(place => (
                     <Link to={'/place/' + place._id}>
                         <div key={place._id}>
@@ -25,8 +34,8 @@ export default function IndexPage() {
                                     <img className="w-full h-full" src={'http://localhost:4000/uploads/' + place.photos?.[0]} alt="" />
                                 )}
                             </div>
-                            <div className=" h-[300px] bg-sky-800 text-white p-4 rounded-2xl flex flex-col justify-between">
-                                <div>                                
+                            <div className=" h-[300px] bg-sky-800 bg-opacity-90 text-white p-4 rounded-2xl flex flex-col justify-between">
+                                <div>
                                     <h2 className="font-bold">{place.address}</h2>
                                     <h3 className="text-sm text-gray-500 text-white mt-2">{place.title}</h3>
                                     <div className="mt-1">

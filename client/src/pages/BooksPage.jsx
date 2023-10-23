@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import AccountNav from "../AccountNav";
 import axios from "axios";
-import HotelsPicture from "../HotelsPicture";
 import { differenceInCalendarDays, format } from "date-fns";
 import { Link } from "react-router-dom";
 import DatesAlbum from "../DatesAlbum";
@@ -23,7 +22,7 @@ export default function BooksPage() {
                     <Link to={`/account/bookings/${booking._id}`} className="gap-6 bg-gray-800 rounded-1xl overflow-hidden">
                         <div className="bg-sky-100 p-2  rounded-xl gap-5">
                             <div>
-                                <HotelsPicture place={booking.place} />
+                                
                             </div>
                             <div className="py-3 pr-3 grow  ">
                                 <h2 className="font-bold text-xl">{booking.place.title}</h2>
